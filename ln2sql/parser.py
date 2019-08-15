@@ -707,8 +707,9 @@ class Parser:
 
         for i in range(0, len(input_word_list)):
             for table_name in self.database_dico:
+                equivalences = self.database_object.get_table_by_name(table_name).equivalences or [table_name]
                 if (input_word_list[i] == table_name) or (
-                            input_word_list[i] in self.database_object.get_table_by_name(table_name).equivalences):
+                            input_word_list[i] in equivalences):
                     if number_of_table_temp == 0:
                         start_phrase = input_word_list[:i]
                     number_of_table_temp += 1
@@ -801,8 +802,9 @@ class Parser:
 
         for i in range(0, len(words)):
             for table_name in self.database_dico:
+                equivalences = self.database_object.get_table_by_name(table_name).equivalences or [table_name]
                 if (words[i] == table_name) or (
-                            words[i] in self.database_object.get_table_by_name(table_name).equivalences):
+                            words[i] in equivalences):
                     if number_of_table == 0:
                         select_phrase = words[:i]
                     tables_of_from.append(table_name)
