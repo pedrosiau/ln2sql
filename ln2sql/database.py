@@ -108,10 +108,15 @@ class Database:
         table = Table()
         for line in lines:
             if 'TABLE' in line:
-                table_name = re.search("`(\w+)`", line)
-                table.name = table_name.group(1)
+                try:
+                    table_name = re.findall("(\w+)", line)
+                    table.name = table_name[1]
+                except Exception as e:
+                    print(e)
+                    break
                 if self.thesaurus_object is not None:
-                    table.equivalences = self.thesaurus_object.get_synonyms_of_a_word(table.name)
+                    table.equivalences = self.thesaurus_object.get_synonyms_of_a_word(table.name) or []
+                    table.equivalences.append(table.name)
             elif 'PRIMARY KEY' in line:
                 primary_key_columns = re.findall("`(\w+)`", line)
                 for primary_key_column in primary_key_columns:
