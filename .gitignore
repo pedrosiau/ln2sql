@@ -104,3 +104,6 @@ ENV/
 
 output.json
 .idea
+
+# vscode config files
+.vscode/
