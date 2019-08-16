@@ -21,7 +21,7 @@ class Ln2sql:
             json_output_path=None,
             thesaurus_path=None,
             stopwords_path=None,
-            color=False
+            color=False,
     ):
         if color == False:
             without_color()
@@ -47,7 +47,7 @@ class Ln2sql:
         self.parser = Parser(database, config)
         self.json_output_path = json_output_path
 
-    def get_query(self, input_sentence):
+    def get_query(self, input_sentence,execute = False):
         queries = self.parser.parse_sentence(input_sentence, self.stopwordsFilter)
 
         if self.json_output_path:
@@ -60,18 +60,10 @@ class Ln2sql:
         for query in queries:
             full_query += str(query)
 
+    
         print(full_query)
 
-        result = self.execute_query(full_query)
-        print('size of result: ', result.size)
-        if (result.empty):
-            print('There is no row :/')
-        elif result.size == 1:
-            print('The result is %s' % result.values[0][0])
-        else:
-            print(result)
-
-        return result
+        return self.execute_query(full_query) if execute else full_query
 
     def remove_json(self, filename="output.json"):
         if os.path.exists(filename):
@@ -83,5 +75,21 @@ class Ln2sql:
 
         query = re.sub(r"\%", "%%", query)
 
-        return pd.read_sql(query, params ={}, con=engine_prod)
+        df = pd.read_sql(query, params ={}, con=engine_prod)
+
+        result = self.parse_query(df)
+
+        return result
+
+    def parse_query(self,result):
+        print('size of result: ', result.size)
+        if (result.empty):
+            print('There is no row :/')
+        elif result.size == 1:
+            print('The result is %s' % result.values[0][0])
+        else:
+            print(result)
+
+        return result
+
 
