@@ -340,7 +340,7 @@ class WhereParser(Thread):
         elif (len(self.intersect(interval_offset, self.negation_keyword_offset)) >= 1):
             return '!='
         elif (len(self.intersect(interval_offset, self.like_keyword_offset)) >= 1):
-            return 'LIKE'
+            return 'ILIKE'
         else:
             return '='
 
