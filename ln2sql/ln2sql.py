@@ -2,6 +2,10 @@
 import argparse
 import os
 
+import sqlalchemy as sa
+import pandas as pd
+import re
+
 from .database import Database
 from .langConfig import LangConfig
 from .parser import Parser
@@ -55,10 +59,23 @@ class Ln2sql:
 
         for query in queries:
             full_query += str(query)
-            print(query)
 
-        return full_query
+        print(full_query)
+
+        result = self.execute_query(full_query)
+        print(result)
+
+        return result
 
     def remove_json(self, filename="output.json"):
         if os.path.exists(filename):
             os.remove(filename)
+
+    def execute_query(self, query):
+        conn_string = 'postgresql://:@localhost:5432/dex_development'
+        engine_prod = sa.create_engine(conn_string)
+
+        query = re.sub(r"\%", "%%", query)
+
+        return pd.read_sql(query, params ={}, con=engine_prod)
+
