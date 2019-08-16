@@ -63,7 +63,13 @@ class Ln2sql:
         print(full_query)
 
         result = self.execute_query(full_query)
-        print(result)
+        print('size of result: ', result.size)
+        if (result.empty):
+            print('There is no row :/')
+        elif result.size == 1:
+            print('The result is %s' % result.values[0][0])
+        else:
+            print(result)
 
         return result
 
