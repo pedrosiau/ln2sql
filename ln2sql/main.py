@@ -3,7 +3,9 @@ import argparse
 from .ln2sql import Ln2sql
 
 cached_queries = {
-    "quantos alunos nos temos atualmente?": '''select count(distinct("UserId")) from descomplica."Contracts" where "ValidTo" >= now()::date and "IsDeleted"=False and "PaymentConfirmed"=True and "ValidFrom" <= (now() + interval '1 day')::date;'''
+    "quantos alunos nós temos atualmente?": '''select count(distinct(user_id)) from contratos where valid_to >= now()::date and is_deleted=False and payment_confirmed=True and valid_from <= (now() + interval '1 day')::date;''',
+    "quantas aulas gravadas nós temos?": ''' select count(id) from modulos where lesson_type in ('Practice', 'Learn') ''',
+    "qual a disciplina mais consumida?": ''' select discipline, count(distinct distinct_id) from aula_consumida where time > '2019-01-01' group by 1 order by 2 desc limit 1 ''',
 }
 
 
