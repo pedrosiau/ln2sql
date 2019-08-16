@@ -19,7 +19,15 @@ def main():
 
     args = arg_parser.parse_args()
     if args.sentence in cached_queries:
-        print(cached_queries[args.sentence])
+        query_to_execute = cached_queries[args.sentence]
+        print(query_to_execute)
+        ln2sql = Ln2sql(
+            database_path=args.database,
+            language_path=args.language,
+            json_output_path=args.json_output,
+            thesaurus_path=args.thesaurus,
+            stopwords_path=args.stopwords,
+        ).execute_query(query_to_execute)
 
     else:
         ln2sql = Ln2sql(
