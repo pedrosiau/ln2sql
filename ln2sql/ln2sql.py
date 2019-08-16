@@ -70,13 +70,10 @@ class Ln2sql:
             os.remove(filename)
 
     def execute_query(self, query):
-        conn_string = 'postgresql://:@localhost:5432/dex_development'
+        conn_string = 'postgresql://pedromorais:@localhost:5432/pedromorais'
         engine_prod = sa.create_engine(conn_string)
-
         query = re.sub(r"\%", "%%", query)
-
         df = pd.read_sql(query, params ={}, con=engine_prod)
-
         result = self.parse_query(df)
 
         return result

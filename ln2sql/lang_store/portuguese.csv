@@ -1,0 +1,18 @@
+AVG: media, Media, medio
+SUM: soma
+MAX: maximo, maior de todos, max, supremo, extremo, culme, mor
+MIN: minimo, menor de todos, infimo, menor de todos
+COUNT: numero, total, quantos
+JUNCTION: e
+DISJUNCTION: ou
+GREATER: maior que, mais que
+LESS: menor que, menos que
+BETWEEN: no intervalo, entre
+ORDER: ordenar, ordenando
+ASC: crescente, crescentemente, menor para o maior
+DESC: descendente, descendentemente, decrescente, descrescentemente, inversamente, maior para o menor 
+GROUP: reunido, agrupado por
+NEGATION: nao
+EQUAL: igual a, iguais a, equivalentes a
+LIKE: similares a, parecido com, similar a, parecidos com
+DISTINCT: distinct, different, distinctive, distinctly, unique
