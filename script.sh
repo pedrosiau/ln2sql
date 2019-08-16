@@ -31,3 +31,5 @@ python3 -m ln2sql.main -d database_store/schema3.sql -l lang_store/portuguese.cs
 python3 -m ln2sql.main -d database_store/schema3.sql -l lang_store/portuguese.csv -j output.json -i "quantos usuarios nós temos na base com create_date maior que 2019-01-01?" -e True
 
 python3 -m ln2sql.main -d database_store/schema3.sql -l lang_store/portuguese.csv -j output.json -i "qual é o maximo create_date de usuarios?" -e True
+
+python3 -m ln2sql.main -i "qual é o maximo create_date de usuarios?" 
